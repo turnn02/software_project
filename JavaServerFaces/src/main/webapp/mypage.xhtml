@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>My Page</title>
+	<style>
+.button {
+	background-color: white;
+	color: black;
+	border: 2px solid;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin-left: 20px;
+	position:relative; 
+	top:-10px; 
+	right:-40px;
+}
+</style>
+</h:head>
+<h:body>
+	<ui:include src="menu.xhtml" />
+	
+	Hello <h:outputText value="#{sessionDataBean.user.name}" />
+	<h:form>
+		<p:growl id="growl" />
+		<p:selectOneMenu  value="#{myPageBean.selectedProduct}" required="true">
+            <f:selectItem itemLabel="Select a product" itemValue="" noSelectionOption="true" />
+            <f:selectItems value="#{myPageBean.products}" />
+        </p:selectOneMenu>
+        <br/>
+        
+		<p:inputTextarea rows="2" cols="100" placeholder="Write your entry..."
+			value="#{myPageBean.post}" />
+		<p:commandButton value="Send" icon="ui-icon-arrow-1-e" update="@form"
+			style="position:relative; top:-10px; right:-30px"
+			action="#{myPageBean.send}" />
+
+		<p:link href="http://www.facebook.com" target="_blank"
+			value="facebook" styleClass="button"
+			 style="border-color:#3b5998;color:#3b5998"/>
+		<p:link href="http://www.twitter.com" target="_blank" value="twitter"  styleClass="button"
+			 style="border-color:#00aced;color:#00aced"/>
+		<p:dataList value="#{myPageBean.postList}" var="userPost"
+			style="width:80%">
+			<f:facet name="header">
+            #{sessionDataBean.user.name} 's Posts
+        </f:facet>
+        This post is about <u>#{userPost.productName}</u>: #{userPost.post}
+    </p:dataList>
+	</h:form>
+
+</h:body>
+</html>

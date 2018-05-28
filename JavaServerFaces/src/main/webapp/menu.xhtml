@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Home" url="/home.xhtml" icon="ui-icon-home" />
+			<p:menuitem value="My Page" url="/mypage.xhtml" icon="ui-icon-person"
+				rendered="#{sessionDataBean.loggin}" />
+			<p:menuitem value="View My Products or Upload Product" url="/myProducts.xhtml"
+				icon="ui-icon-suitcase" rendered="#{sessionDataBean.loggin}" />
+			  
+			<f:facet name="options">
+
+				<p:commandButton value="login" action="login?faces-redirect=true"
+					icon="ui-icon-power" rendered="#{!sessionDataBean.loggin}" />
+				<h:outputText value="#{sessionDataBean.user.name}"
+					rendered="#{sessionDataBean.loggin}" />
+				<p:commandButton value="logout" action="#{loginBean.logout}"
+					icon="ui-icon-power" rendered="#{sessionDataBean.loggin}" />
+
+			</f:facet>
+		</p:menubar>
+	</h:form>
+</ui:composition>
